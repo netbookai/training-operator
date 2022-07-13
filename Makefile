@@ -93,9 +93,16 @@ undeploy: ## Undeploy controller from the K8s cluster specified in ~/.kube/confi
 	$(KUSTOMIZE) build manifests/overlays/standalone | kubectl delete -f -
 
 
-CONTROLLER_GEN = $(shell pwd)/bin/controller-gen
-controller-gen: ## Download controller-gen locally if necessary.
-	$(call go-get-tool,$(CONTROLLER_GEN),sigs.k8s.io/controller-tools/cmd/controller-gen@v0.6.0)
+CONTROLLER_TOOLS_VERSION ?= v0.8.0
+CONTROLLER_GEN ?= $(LOCALBIN)/controller-gen
+LOCALBIN ?= $(shell pwd)/bin
+
+
+.PHONY: controller-gen
+controller-gen: #$(CONTROLLER_GEN) ## Download controller-gen locally if necessary.
+	GOBIN=$(LOCALBIN) go install sigs.k8s.io/controller-tools/cmd/controller-gen@$(CONTROLLER_TOOLS_VERSION)
+# $(CONTROLLER_GEN): $(LOCALBIN)
+
 
 KUSTOMIZE = $(shell pwd)/bin/kustomize
 kustomize: ## Download kustomize locally if necessary.
