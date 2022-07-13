@@ -22,11 +22,7 @@ rules:
   - apiGroups:
       - kubeflow.org
     resources:
-      - mpijobs
-      - tfjobs
       - pytorchjobs
-      - mxjobs
-      - xgboostjobs
     verbs:
       - create
       - delete
@@ -38,11 +34,7 @@ rules:
   - apiGroups:
       - kubeflow.org
     resources:
-      - mpijobs/status
-      - tfjobs/status
       - pytorchjobs/status
-      - mxjobs/status
-      - xgboostjobs/status
     verbs:
       - get
 
@@ -57,11 +49,7 @@ rules:
   - apiGroups:
       - kubeflow.org
     resources:
-      - mpijobs
-      - tfjobs
       - pytorchjobs
-      - mxjobs
-      - xgboostjobs
     verbs:
       - get
       - list
@@ -69,10 +57,6 @@ rules:
   - apiGroups:
       - kubeflow.org
     resources:
-      - mpijobs/status
-      - tfjobs/status
       - pytorchjobs/status
-      - mxjobs/status
-      - xgboostjobs/status
     verbs:
       - get
